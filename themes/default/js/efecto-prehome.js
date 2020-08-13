@@ -1,0 +1,9 @@
+$(document).ready(function(){if(device.desktop()&&getCookie("prehome")!='vista'){var contador_saltos=0;var posicion_logo=0;var numero_saltos=1;var mousewheelevt=(/Firefox/i.test(navigator.userAgent))?"DOMMouseScroll":"mousewheel"
+mousewheelevt+=" mousedown scroll";$("html,body").scrollTop(0).css("overflow","hidden");$(document).bind(mousewheelevt,function(e){var evt=window.event||e
+evt=evt.originalEvent?evt.originalEvent:evt;var delta=evt.detail?evt.detail*(-40):evt.wheelDelta
+if(contador_saltos<numero_saltos){contador_saltos++;posicion_logo-=altura_pantalla/numero_saltos/2;$(".logo-prehome").stop().animate({top:posicion_logo},1000);}
+if(contador_saltos>=numero_saltos){$(document).unbind(mousewheelevt);$(".scrolldown-button").fadeOut(1500);$("#prehome").fadeOut(2000);setTimeout(function(){$("html,body").css("overflow","auto");},1000);var lang=window.navigator.language||navigator.browserLanguage;if((lang=='zh-CN'||lang=='zh'||lang=='zh-HK'||lang=='zh-Hant'||lang=='zh-SG'||lang=='zh-TW')&&getCookiePopup("popupchina")!='vista'){mostrarPopup();}}});}else{$("#prehome").css("display","none");}
+efectoClaseFixedFooter();$(window).scroll(function(){efectoClaseFixedFooter();});});function setCookieMinutes(cname,cvalue,minutes){var d=new Date();d.setTime(d.getTime()+(minutes*60*1000));var expires="expires="+d.toUTCString();document.cookie=cname+"="+cvalue+"; "+expires;}
+function getCookie(cname){var name=cname+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1);if(c.indexOf(name)==0)return c.substring(name.length,c.length);}
+return"";}
+function efectoClaseFixedFooter(){if(device.desktop()){if($(window).scrollTop()>0){$("footer").removeClass("fixed");}else{$("footer").addClass("fixed");}}}
